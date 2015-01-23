@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Write a description of class CelebrityNames here.
+ * Scans and sorts by last name Celebrities and their birthdates
  * 
  * @author Roger Jaffe
  * @version 2015-01-19
@@ -13,6 +13,9 @@ public class CelebrityNames
     public static void main(String args[]) throws IOException
     { 
         Scanner sf = new Scanner(new File(FILE_NAME));
+        FileWriter fw = new FileWriter("C:\\Users\\student\\Desktop\\celebrity mash up\\celebrity mash up\\Print.txt"); 
+
+        PrintWriter output = new PrintWriter(fw);
 
         int maxIndx = -1; //-1 so when we increment below, the first index is 0
         String text[] = new String[1000]; //to be safe, declare more than we need
@@ -30,14 +33,23 @@ public class CelebrityNames
         { 
             Scanner sc = new Scanner( text[j] );
             String firstName = sc.next( );
-            String lastName = sc.next( );
-            reversedName[j] = lastName + ", " + firstName;
+            String middleName = sc.next( );
+            String lastName = sc.next ( );
+            String birthDate = sc.next ( );
+            reversedName[j] = lastName + ", " + firstName + " " + middleName + " -- " + birthDate;
+            
+            
         } 
-        
+
         Arrays.sort(reversedName);
         for (int j =0; j <= maxIndx; j++)
         { 
             System.out.println(reversedName[j]);
+            output.println(reversedName[j]);
         } 
+
+        output.close( ); //These two lines are very important. Some of the data 
+
+        fw.close( ); //may not actually be put on disk until you close.
     }
 }
